@@ -37,19 +37,26 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: libcie-pkcs11.so
+all: libcie-pkcs11.so abilitacie
 
 # Tool invocations
 libcie-pkcs11.so: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -shared -o "libcie-pkcs11.so" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ --shared -o "libcie-pkcs11.so" $(OBJS) $(USER_OBJS) $(LIBS)
+	@echo 'Finished building target: $@'
+	@echo ' '
+
+abilitacie: $(OBJS) $(USER_OBJS)
+	@echo 'Building target: $@'
+	@echo 'Invoking: GCC C++ Linker'
+	g++ -I./ -pthread -o "abilitacie" $(OBJS) $(USER_OBJS) $(LIBS) abilitacie.cpp
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(LIBRARIES)$(CC_DEPS)$(C++_DEPS)$(C_UPPER_DEPS)$(CXX_DEPS)$(OBJS)$(CPP_DEPS)$(C_DEPS) libcie-pkcs11.so
+	-$(RM) $(LIBRARIES)$(CC_DEPS)$(C++_DEPS)$(C_UPPER_DEPS)$(CXX_DEPS)$(OBJS)$(CPP_DEPS)$(C_DEPS) libcie-pkcs11.so abilitacie
 	-@echo ' '
 
 .PHONY: all clean dependents
