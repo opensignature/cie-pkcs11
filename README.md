@@ -1,3 +1,3 @@
 # cie-pkcs11
-
-make
+require: 
+https://github.com/weidai11/cryptopp
